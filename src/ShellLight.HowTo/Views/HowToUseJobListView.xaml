@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="ShellLight.HowTo.Views.HowToUseJobListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="400">
+
+    <Grid x:Name="LayoutRoot" Background="White">
+        <StackPanel>
+            <TextBlock Text="How To Use Job List" FontSize="20"></TextBlock>
+            <Button Content="Start Job 1" Click="Button_Click_Job_1"></Button>
+            <Button Content="Start Job 2" Click="Button_Click_Job_2"></Button>
+            <Button Content="Start Job 3" Click="Button_Click_Job_3"></Button>
+            <TextBlock Text="source code: HowToUseJobListCommand.cs"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

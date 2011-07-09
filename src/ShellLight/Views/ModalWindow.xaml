@@ -1,0 +1,9 @@
+﻿<sdk:ChildWindow x:Class="ShellLight.Views.ModalWindow"
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+           xmlns:sdk="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
+           Title="ModalWindow" Style="{StaticResource ChildWindowStyle}">
+    <Border BorderThickness="7" BorderBrush="Transparent">
+        <ContentControl x:Name="Content" HorizontalContentAlignment="Stretch" />
+    </Border>
+</sdk:ChildWindow>

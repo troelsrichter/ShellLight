@@ -1,0 +1,97 @@
+﻿<UserControl x:Class="ShellLight.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controlsInputToolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit" xmlns:Converters="clr-namespace:ShellLight.Converters" xmlns:Contract="clr-namespace:ShellLight.Contract;assembly=ShellLight.Contract" mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="400">
+
+    <Grid x:Name="LayoutRoot" DataContext="{Binding}">
+        <Grid.Background>
+            <ImageBrush ImageSource="{Binding BackgroundImageSource}" />
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="150" />
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Grid.Row="0" Grid.Column="0" Background="Black" Orientation="Horizontal" Opacity="0.8">
+            <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" Foreground="White" Text="{Binding CommandInFocus.Name}" />
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="1" Background="Black" Orientation="Horizontal" Opacity="0.8">
+            <Button Click="CloseCommandButton_Click" Visibility="{Binding CommandInFocusVisibility}" FontSize="8" Margin="130,0,0,0" Padding="0" Width="16" Height="16" Content="x" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right"></Button>
+        </StackPanel>
+
+        <Border Background="White" Opacity="0.95" Visibility="{Binding CommandInFocusVisibility}" Grid.ColumnSpan="2" Grid.Row="1" BorderThickness="2" BorderBrush="Black" CornerRadius="15" Margin="25" Padding="10">
+         <ContentControl Content="{Binding CommandInFocus.View}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
+        </Border>
+    
+        <StackPanel Grid.Row="2" Grid.Column="0" x:Name="taskStackPanel"  Orientation="Horizontal" Background="Black" Opacity="0.8">
+            <Button Margin="5" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"  Click="SearchButton_Click" Style="{StaticResource GlassButtonStyle}"  Background="#FFABE3FF" BorderBrush="#FF00AAFF" Height="30" Width="30">
+                <Button.Content>
+                    <Image VerticalAlignment="Center" HorizontalAlignment="Center" Source="Images/logo_button.png" Width="21" Height="21"></Image>
+                </Button.Content>
+                <ToolTipService.ToolTip>
+                    <ToolTip  Content="Start launcher and search for any feature"></ToolTip>
+                </ToolTipService.ToolTip>
+            </Button>
+            <ItemsControl ItemsSource="{Binding TaskbarCommands}">
+                <ItemsControl.Resources>
+                    <Converters:UICommandStateToBoolConverter x:Key="UICommandStateToBoolConverter" />
+                </ItemsControl.Resources>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" Background="Transparent"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Margin="2" Command="{Binding}" CommandParameter="{Binding Context}">
+                            <Button.Content>
+                                <Image Source="{Binding IconSource}" Width="30" Height="30" />
+                            </Button.Content>
+                            <ToolTipService.ToolTip>
+                                <ToolTip Content="{Binding}"></ToolTip>
+                            </ToolTipService.ToolTip>
+                            <controlsInputToolkit:ContextMenuService.ContextMenu>
+                                <controlsInputToolkit:ContextMenu>
+                                    <controlsInputToolkit:MenuItem DataContext="{Binding}" Header="Unpin this feature from the taskbar" Click="UnpinFromTaskbar_Click" IsEnabled="{Binding State, Converter={StaticResource UICommandStateToBoolConverter},ConverterParameter=Initialized}" >
+                                        <controlsInputToolkit:MenuItem.Icon>
+                                            <Image Source="Images/pin_16.png" />
+                                        </controlsInputToolkit:MenuItem.Icon>
+                                    </controlsInputToolkit:MenuItem>
+                                </controlsInputToolkit:ContextMenu>
+                            </controlsInputToolkit:ContextMenuService.ContextMenu>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="1" Background="Black" Opacity="0.8">
+            <ItemsControl ItemsSource="{Binding TrayCommands}" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Margin="10">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" Background="Transparent"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Command="{Binding}" CommandParameter="{Binding Context}" BorderThickness="0" Margin="1" Background="Transparent">
+                            <Button.Content>
+                                <Image Source="{Binding IconSource}" Width="16" Height="16" />
+                            </Button.Content>
+                            <ToolTipService.ToolTip>
+                                <ToolTip Content="{Binding}"></ToolTip>
+                            </ToolTipService.ToolTip>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </Grid>
+</UserControl>

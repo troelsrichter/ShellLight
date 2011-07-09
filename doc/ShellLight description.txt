@@ -1,0 +1,30 @@
+Purpose
+
+User friendly end user experience 
+ - fast access to any feature in the system through shelllight launcher
+ - fast startup even as the system develops (features is loaded async)
+ - full keyboard control
+ - you should allways know what the system is dooing (joblist support)
+ - user specific behaviour
+
+Fast, Easy and fun UI development
+ - Rich behaviour with very little code (Conventions over configuration)
+ - Everything in the UI is based upon commands
+
+
+Inspiration:
+ Windows7, SpotLight, Launchy, QuickSilver
+
+Requires Silverlight 4, why?
+ - MEF is used to decouple the feature modules from ShellLight itself
+ - ICommand and databining to buttons is used to simplify the UI code
+
+Developer Features:
+ - Event publishing between UICommands throug EventAggregator from PRISM
+ - All UICommands can bee accessed from each other through a simple ServiceLocator implementation
+ - 
+
+Thanks to
+ - Icons
+ - PRISM
+ - background
