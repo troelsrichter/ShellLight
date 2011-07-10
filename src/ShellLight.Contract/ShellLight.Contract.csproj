@@ -62,6 +62,7 @@
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\IsModalAttribute.cs" />
     <Compile Include="Attributes\LauncherAttribute.cs" />
     <Compile Include="Attributes\AttachToTrayAttribute.cs" />
     <Compile Include="Attributes\ExecuteAtStartupAttribute.cs" />

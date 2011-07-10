@@ -178,6 +178,8 @@ namespace ShellLight
             if (Config.IsolatedStorage.PinnedCommands.ContainsKey(command.Id) && Config.IsolatedStorage.PinnedCommands[command.Id])
             {
                 var datacontext = DataContext as MainPageViewModel;
+                var context = new UICommandContext() { Events = events, RegiseredCommands = RegisteredCommands.ToList() };
+                command.Context = context;
                 datacontext.TaskbarCommands.Add(command);
             }
         }
@@ -207,38 +209,41 @@ namespace ShellLight
             var command = sender as UICommand;
 
             if (command != null)
+            {
                 IncrementScore(command);
-            if (command.IsModal)
-            {
-                var modalWindow = new ModalWindow(command);
-                modalWindow.Show();
-                modalWindow.Closed += new EventHandler(modalWindow_Closed);
-            }
-            else if (command.View != null)
-            {
-                if (command.HasAttribute<AttachToTrayAttribute>())
+
+                if (command.View != null)
                 {
-                    if (!datacontext.TrayCommands.Contains(command))
+                    if (command.HasAttribute<IsModalAttribute>())
                     {
-                        datacontext.TrayCommands.Add(command);
+                        var modalWindow = new ModalWindow(command,
+                                                          command.GetAttribute<IsModalAttribute>().HasCloseButton);
+                        modalWindow.Show();
+                        modalWindow.Closed += modalWindow_Closed;
+                    }
+                    else if (command.HasAttribute<AttachToTrayAttribute>())
+                    {
+                        if (!datacontext.TrayCommands.Contains(command))
+                        {
+                            datacontext.TrayCommands.Add(command);
+                        }
+                        else
+                        {
+                            var trayWindow = new TrayWindow(command.View, command.Name);
+                            trayWindow.Show();
+                        }
                     }
                     else
                     {
-                        var trayWindow = new TrayWindow(command.View, command.Name);
-                        trayWindow.Show();
-                    }
-                }
-                else
-                {
-                    datacontext.CommandInFocus = command;
+                        datacontext.CommandInFocus = command;
 
-                    if (!datacontext.TaskbarCommands.Contains(command))
-                    {
-                        datacontext.TaskbarCommands.Add(command);
+                        if (!datacontext.TaskbarCommands.Contains(command))
+                        {
+                            datacontext.TaskbarCommands.Add(command);
+                        }
                     }
                 }
             }
-
         }
 
         void modalWindow_Closed(object sender, EventArgs e)

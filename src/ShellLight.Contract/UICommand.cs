@@ -70,8 +70,6 @@ namespace ShellLight.Contract
         /// </summary>
         public string ParameterDiscription {get; private set;}
 
-        public bool IsModal { get; set; }
-
         public virtual bool CanExecute(object parameter)
         {
             if (this.HasAttribute<RequiresElevatedTrustAttribute>())

@@ -6,13 +6,12 @@ using ShellLight.HowTo.Views;
 namespace ShellLight.HowTo.Commands
 {
     [PinToTaskbar]
+    [IsModal]
     public class HowToCreateAModalDialogCommand: UICommand
     {
         public override UIElement DoShow()
         {
-            IsModal = true;
             return new HowToCreateAModalDialogView(this);
         }
-
     }
 }

@@ -3,8 +3,8 @@ bin/
 ClientBin/
 obj/
 *.user
-*.suo 
-*/Debug 
+*.suo
+*/Debug
 */Release
 _ReSharper.*/
 *.resharper

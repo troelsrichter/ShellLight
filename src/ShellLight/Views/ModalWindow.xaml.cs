@@ -28,9 +28,10 @@ namespace ShellLight.Views
             }
         }
 
-        public ModalWindow(UICommand command):this()
+        public ModalWindow(UICommand command, bool hasCloseButton):this()
         {
             this.command = command;
+            this.HasCloseButton = hasCloseButton;
             Content.Content = command.View;
             Title = command.Name;
             command.Closing += command_Closing;
