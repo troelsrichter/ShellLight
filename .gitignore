@@ -1,8 +1,10 @@
-*/bin
-*/obj 
+Bin/
+bin/
+ClientBin/
+obj/
 *.user
 *.suo 
 */Debug 
 */Release
-*/_ReSharper.* 
+_ReSharper.*/
 *.resharper
