@@ -31,8 +31,8 @@ namespace ShellLight
             {
                 ViewHelper.ShowMessage(
                     "A new version of " + Config.ApplicationName +
-                    " is installed.\nIt will be activated at next startup.\nPlease enjoy!",
-                    "New version is installed");
+                    " is downloaded.\nIt will be installed automatically after restarting the application.\nPlease enjoy!",
+                    "New version is downloaded");
             }
             else if (e.Error != null)
             {
@@ -93,7 +93,7 @@ namespace ShellLight
                 appSettings[Config.IsolatedStorage.WindowLeft] = MainWindow.Left;
                 appSettings[Config.IsolatedStorage.WindowWidth] = MainWindow.Width;
                 //if you minimize the window in height it is possible to set the height to (double)UInt32.MaxValue+1 which is invalid
-                appSettings[Config.IsolatedStorage.WindowHeight] = (MainWindow.Height == (double)UInt32.MaxValue + 1) ? 0 : MainWindow.Height;
+                appSettings[Config.IsolatedStorage.WindowHeight] = (MainWindow.Height == (double)UInt32.MaxValue+1) ? 0 : MainWindow.Height;
             }
             appSettings[Config.IsolatedStorage.WindowState] = (UInt32)MainWindow.WindowState;
         }

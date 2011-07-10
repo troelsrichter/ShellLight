@@ -40,27 +40,35 @@ namespace ShellLight
         /// </summary>
         public static List<Uri> ModuleUris
         {
-            get { 
-                var uris = new List<Uri>(); 
-                uris.Add(new Uri("ShellLight.Framework.xap", UriKind.Relative));
-                uris.Add(new Uri("ShellLight.HowTo.xap", UriKind.Relative)); //todo ShellLight.HowTo.xap should be removed before you deploy you application
-                return uris;}
+            get {
+                var uris = new List<Uri>();
+                //uris.Add(new Uri("ShellLight.Framework.xap", UriKind.Relative));
+                //uris.Add(new Uri("ShellLight.HowTo.xap", UriKind.Relative));
+                uris.Add(new Uri("Kanbana.Client_1_3.xap", UriKind.Relative));
+                return uris;
+            }
         }
 
         public static string ApplicationName
         {
-            get { return "ShellLight"; }
+            get { return "Kanbana"; }
         }
 
         public static string BackgroundImageSource
         {
-            get { return "http://www.tdfast.com/wallpapers_res1/439_10672_1.jpg"; }
+            //get { return "http://www.tdfast.com/wallpapers_res1/439_10672_1.jpg"; }
+            //get { return "http://www.tdfast.com/wallpapers_res1/1_6474_2.jpg"; }
+            //get { return "http://www.tdfast.com/wallpapers_res1/22244.jpg"; }
+            get { return "http://www.tdfast.com/wallpapers_res1/431_9923_2.jpg"; }
+            //get { return "http://www.tdfast.com/wallpapers_res1/431_9908_6.jpg"; }
+            //get { return "http://www.tdfast.com/wallpapers_res1/389_8814_2.jpg"; }
+            //get { return "http://www.tdfast.com/wallpapers_res1/389_8751_3.jpg"; }
         }
 
         public static string SupportEmail
         {
-            get { return "http://shelllight.development@gmail.com"; }
-         }
+            get { return "support@kanbana.com"; }
+        }
 
         public static int NumberOfRetriesWhenPackageDownloadFails
         {

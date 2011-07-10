@@ -1,10 +1,10 @@
-<OutOfBrowserSettings ShortName="ShellLight" EnableGPUAcceleration="False" ShowInstallMenuItem="True">
-  <OutOfBrowserSettings.Blurb>ShellLight Application on your desktop; at home, at work or on the go.</OutOfBrowserSettings.Blurb>
+<OutOfBrowserSettings ShortName="Kanbana" EnableGPUAcceleration="False" ShowInstallMenuItem="True">
+  <OutOfBrowserSettings.Blurb>Kanbana - improve your workflow</OutOfBrowserSettings.Blurb>
   <OutOfBrowserSettings.WindowSettings>
-    <WindowSettings Title="ShellLight" Height="600" Width="960" Top="0" Left="0" WindowStartupLocation="Manual" />
+    <WindowSettings Title="Kanbana" Height="600" Width="950" Top="0" Left="0" WindowStartupLocation="Manual" />
   </OutOfBrowserSettings.WindowSettings>
   <OutOfBrowserSettings.SecuritySettings>
-    <SecuritySettings ElevatedPermissions="Required" />
+    <SecuritySettings ElevatedPermissions="NotRequired" />
   </OutOfBrowserSettings.SecuritySettings>
   <OutOfBrowserSettings.Icons>
     <Icon Size="16,16">Images/logo_16.png</Icon>
