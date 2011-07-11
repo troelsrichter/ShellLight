@@ -5,10 +5,15 @@ using ShellLight.Contract;
 
 namespace ShellLight.ViewModels
 {
-    public class SearchWindowViewModel: INotifyPropertyChanged
+    public enum LauncherMode
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        AllFeatures,
+        TopFeatures,
+        Search
+    } ;
 
+    public class SearchWindowViewModel: ViewModelBase
+    {
         public SearchWindowViewModel()
         {
             topScoreCommands = new ObservableCollection<UICommand>();
@@ -19,33 +24,26 @@ namespace ShellLight.ViewModels
         public ObservableCollection<UICommand> TopScoreCommands
         {
             get { return topScoreCommands; }
-            set
-            {
-                if (topScoreCommands != value)
-                {
-                    topScoreCommands = value;
-                    PropertyChanged(this, new PropertyChangedEventArgs("TopScoreCommands"));
-                }
-            }
+            set { SetValue(ref topScoreCommands, value, "TopScoreCommands"); }
+        }
+
+        private ObservableCollection<UICommand> allCommands;
+        public ObservableCollection<UICommand> AllCommands
+        {
+            get { return allCommands; }
+            set { SetValue(ref allCommands, value, "AllCommands"); }
         }
 
         private ObservableCollection<UICommand> searchResultCommands;
         public ObservableCollection<UICommand> SearchResultCommands
         {
             get { return searchResultCommands; }
-            set
-            {
-                if (searchResultCommands != value)
-                {
-                    searchResultCommands = value;
-                    PropertyChanged(this, new PropertyChangedEventArgs("SearchResultCommands"));
-                }
-            }
+            set { SetValue(ref searchResultCommands, value, "SearchResultCommands"); }
         }
 
         public Visibility TopScoreVisibility
         {
-            get { return string.IsNullOrEmpty(searchText) ? Visibility.Visible : Visibility.Collapsed; }
+            get { return mode == LauncherMode.TopFeatures && string.IsNullOrEmpty(searchText) ? Visibility.Visible : Visibility.Collapsed; }
         }
 
         public Visibility SearchResultVisibility
@@ -53,25 +51,37 @@ namespace ShellLight.ViewModels
             get { return !string.IsNullOrEmpty(searchText) ? Visibility.Visible : Visibility.Collapsed; }
         }
 
+        public Visibility AllVisibility
+        {
+            get { return mode == LauncherMode.AllFeatures && string.IsNullOrEmpty(searchText) ? Visibility.Visible : Visibility.Collapsed; }
+        }
+
         private string searchText = string.Empty;
         public string SearchText
         {
             get { return searchText; }
-            set
-            {
-                if (value != searchText)
-                {
-                    searchText = value;
-                    PropertyChanged(this, new PropertyChangedEventArgs("SearchText"));
-                    PropertyChanged(this, new PropertyChangedEventArgs("TopScoreVisibility"));
-                    PropertyChanged(this, new PropertyChangedEventArgs("SearchResultVisibility"));
-                }
+            set { 
+                SetValue(ref searchText, value, "SearchText"); 
+                Refresh();
             }
+        }
+
+        public void Refresh()
+        {
+            OnPropertyChanged("SearchText", "TopScoreVisibility", "SearchResultVisibility", "AllVisibility");
         }
 
         public string Title
         {
             get { return Config.ApplicationName + " Launcher"; }
         }
+
+        private LauncherMode mode = LauncherMode.TopFeatures;
+        public LauncherMode Mode
+        {
+            get { return mode; }
+            set { SetValue(ref mode, value, "Mode"); }
+        }
+
     }
 }

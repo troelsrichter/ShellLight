@@ -145,6 +145,21 @@ namespace ShellLight.Views
                 }
             }
         }
+
+        private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
+        {
+            var datacontext = DataContext as SearchWindowViewModel;
+            datacontext.AllCommands = new ObservableCollection<UICommand>(launcherCommands);
+            datacontext.Mode = LauncherMode.AllFeatures;
+            datacontext.Refresh();
+        }
+
+        private void HyperlinkButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            var datacontext = DataContext as SearchWindowViewModel;
+            datacontext.Mode = LauncherMode.TopFeatures;
+            datacontext.Refresh();
+        }
     }
 }
 

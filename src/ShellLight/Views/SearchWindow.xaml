@@ -4,7 +4,7 @@
            xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls" xmlns:controlsInputToolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit" Width="300" Height="400" Margin="0,0,40,40"
            Title="{Binding Title}" Style="{StaticResource ChildWindowStyle}" x:Name="LayoutRoot" DataContext="{Binding}">
     <Border x:Name="border" BorderThickness="0" Padding="7">
-    	<Border.Background>
+        <Border.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="Black" Offset="0"/>
                 <GradientStop Color="#FF7E7E7E" Offset="1"/>
@@ -36,8 +36,12 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <StackPanel x:Name="topScoreStackPanel" Grid.Row="0" Visibility="{Binding TopScoreVisibility}" Orientation="Horizontal" Background="Transparent">
-                <ListBox ItemsSource="{Binding TopScoreCommands}" x:Name="topScoreCommandListBox" Width="200">
+            <Grid x:Name="topScoreStackPanel" Grid.Row="0" HorizontalAlignment="Left" Visibility="{Binding TopScoreVisibility}" Background="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="20" />
+                </Grid.RowDefinitions>
+                <ListBox Grid.Row="0" ItemsSource="{Binding TopScoreCommands}" x:Name="topScoreCommandListBox" Width="200">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" Background="Transparent">
@@ -56,8 +60,36 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <StackPanel/>
-            </StackPanel>
+                <HyperlinkButton Grid.Row="1" Content="all features" VerticalAlignment="Center" Margin="5,0,0,0" Click="HyperlinkButton_Click" />
+            </Grid>
+
+            <Grid x:Name="allStackPanel" Grid.Row="0" HorizontalAlignment="Left" Visibility="{Binding AllVisibility}" Background="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="20" />
+                </Grid.RowDefinitions>
+                <ListBox Grid.Row="0" ItemsSource="{Binding AllCommands}" x:Name="allListBox" Visibility="{Binding AllVisibility}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Background="Transparent">
+                                <Image Source="{Binding IconSource}" Width="16" Height="16" />
+                                <HyperlinkButton Content="{Binding}" Command="{Binding}" CommandParameter="{Binding Context}" VerticalAlignment="Center" Margin="2,0,0,0" />
+                                <controlsInputToolkit:ContextMenuService.ContextMenu>
+                                    <controlsInputToolkit:ContextMenu>
+                                        <controlsInputToolkit:MenuItem DataContext="{Binding}" Header="Pin to taskbar" Click="PinToTaskbar_Click">
+                                            <controlsInputToolkit:MenuItem.Icon>
+                                                <Image Source="../Images/pin_16.png" />
+                                            </controlsInputToolkit:MenuItem.Icon>
+                                        </controlsInputToolkit:MenuItem>
+                                    </controlsInputToolkit:ContextMenu>
+                                </controlsInputToolkit:ContextMenuService.ContextMenu>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <HyperlinkButton Grid.Row="1" Content="back" VerticalAlignment="Center" Margin="5,0,0,0" Click="HyperlinkButton_Click_1" />
+            </Grid>
+
             <StackPanel Grid.Row="1" Orientation="Horizontal" Background="Transparent">
                 <TextBox  Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=Explicit}" x:Name="searchTextBox" Width="200"  Height="22"/>
             </StackPanel>
