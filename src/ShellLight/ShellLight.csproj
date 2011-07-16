@@ -83,7 +83,12 @@
     <Reference Include="System.Windows.Controls.Input.Toolkit">
       <HintPath>..\..\lib\toolkit\System.Windows.Controls.Input.Toolkit.dll</HintPath>
     </Reference>
-    <Reference Include="System.Windows.Controls.Toolkit, Version=4.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Toolkit">
+      <HintPath>..\..\lib\toolkit\System.Windows.Controls.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Controls.Toolkit.Internals">
+      <HintPath>..\..\lib\toolkit\System.Windows.Controls.Toolkit.Internals.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
@@ -136,12 +141,6 @@
     <None Include="Properties\AppManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ShellLight.Contract\ShellLight.Contract.csproj">
-      <Project>{063D5E15-B4DA-4FA5-9B22-832D90910157}</Project>
-      <Name>ShellLight.Contract</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Properties\OutOfBrowserSettings.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +161,12 @@
     </Content>
     <Resource Include="Images\pin_16.png" />
     <Resource Include="Images\logo_button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ShellLight.Contract\ShellLight.Contract.csproj">
+      <Project>{063D5E15-B4DA-4FA5-9B22-832D90910157}</Project>
+      <Name>ShellLight.Contract</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
