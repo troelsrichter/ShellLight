@@ -85,33 +85,52 @@ namespace ShellLight
 
         private void SaveWindowUserSettings()
         {
-            IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
-
-            if (MainWindow.WindowState == WindowState.Normal)
+            try
             {
-                appSettings[Config.IsolatedStorage.WindowTop] = MainWindow.Top;
-                appSettings[Config.IsolatedStorage.WindowLeft] = MainWindow.Left;
-                appSettings[Config.IsolatedStorage.WindowWidth] = MainWindow.Width;
-                //if you minimize the window in height it is possible to set the height to (double)UInt32.MaxValue+1 which is invalid
-                appSettings[Config.IsolatedStorage.WindowHeight] = (MainWindow.Height == (double)UInt32.MaxValue + 1) ? 0 : MainWindow.Height;
+                IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
+
+                if (MainWindow.WindowState == WindowState.Normal)
+                {
+                    appSettings[Config.IsolatedStorage.WindowTop] = MainWindow.Top;
+                    appSettings[Config.IsolatedStorage.WindowLeft] = MainWindow.Left;
+                    appSettings[Config.IsolatedStorage.WindowWidth] = MainWindow.Width;
+                    //if you minimize the window in height it is possible to set the height to (double)UInt32.MaxValue+1 which is invalid
+                    appSettings[Config.IsolatedStorage.WindowHeight] = (MainWindow.Height ==
+                                                                        (double)UInt32.MaxValue + 1)
+                                                                           ? 0
+                                                                           : MainWindow.Height;
+                }
+                appSettings[Config.IsolatedStorage.WindowState] = (UInt32)MainWindow.WindowState;
+                appSettings.Save();
             }
-            appSettings[Config.IsolatedStorage.WindowState] = (UInt32)MainWindow.WindowState;
+            catch (Exception)
+            {
+                //suppress error
+            }
         }
 
         private void RestoreWindowUserSettings()
         {
-            IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
-            if (appSettings.Contains(Config.IsolatedStorage.WindowState))
+            try
             {
-                MainWindow.WindowState = (WindowState)(UInt32)appSettings[Config.IsolatedStorage.WindowState];
-            }
+                IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
+                if (appSettings.Contains(Config.IsolatedStorage.WindowState))
+                {
+                    MainWindow.WindowState = (WindowState)(UInt32)appSettings[Config.IsolatedStorage.WindowState];
+                }
 
-            if (MainWindow.WindowState == WindowState.Normal && appSettings.Contains(Config.IsolatedStorage.WindowTop))
+                if (MainWindow.WindowState == WindowState.Normal &&
+                    appSettings.Contains(Config.IsolatedStorage.WindowTop))
+                {
+                    MainWindow.Top = (double)appSettings[Config.IsolatedStorage.WindowTop];
+                    MainWindow.Left = (double)appSettings[Config.IsolatedStorage.WindowLeft];
+                    MainWindow.Width = (double)appSettings[Config.IsolatedStorage.WindowWidth];
+                    MainWindow.Height = (double)appSettings[Config.IsolatedStorage.WindowHeight];
+                }
+            }
+            catch (Exception)
             {
-                MainWindow.Top = (double)appSettings[Config.IsolatedStorage.WindowTop];
-                MainWindow.Left = (double)appSettings[Config.IsolatedStorage.WindowLeft];
-                MainWindow.Width = (double)appSettings[Config.IsolatedStorage.WindowWidth];
-                MainWindow.Height = (double)appSettings[Config.IsolatedStorage.WindowHeight];
+                //suppress error
             }
         }
     }
