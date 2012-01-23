@@ -44,7 +44,7 @@ namespace ShellLight
                 var uris = new List<Uri>();
                 //uris.Add(new Uri("ShellLight.Framework.xap", UriKind.Relative));
                 //uris.Add(new Uri("ShellLight.HowTo.xap", UriKind.Relative));
-                uris.Add(new Uri("Kanbana.Client_1_3.xap", UriKind.Relative));
+                uris.Add(new Uri("Kanbana.Client_1_4.xap", UriKind.Relative));
                 return uris;
             }
         }
