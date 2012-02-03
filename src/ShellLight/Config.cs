@@ -6,6 +6,7 @@ namespace ShellLight
 {
     public static class Config
     {
+      
         public static class IsolatedStorage
         {
             public const string WindowState = "Shelllight_WindowState";
@@ -14,6 +15,7 @@ namespace ShellLight
             public const string WindowWidth = "Shelllight_WindowWidth";
             public const string WindowHeight = "Shelllight_WindowHeight";
             private const string PinnedCommandsKey = "Shelllight_PinnedCommands";
+            private const string BackgroundImageUrlKey = "Shelllight_BackgroundImageUrl";
 
             public static Dictionary<string,bool> PinnedCommands
             {
@@ -30,6 +32,18 @@ namespace ShellLight
                         pinnedCommands = IsolatedStorageSettings.ApplicationSettings[PinnedCommandsKey] as Dictionary<string, bool>;
                     }
                     return pinnedCommands;
+                }
+            }
+
+            public static string BackgroundImageUrl 
+            {
+                get
+                {
+                    if (IsolatedStorageSettings.ApplicationSettings.Contains(BackgroundImageUrlKey))
+                    {
+                        return (string) IsolatedStorageSettings.ApplicationSettings[BackgroundImageUrlKey];
+                    }
+                    return String.Empty;
                 }
             }
         }
@@ -56,10 +70,15 @@ namespace ShellLight
 
         public static string BackgroundImageSource
         {
+            get
+            {
+                var background = IsolatedStorage.BackgroundImageUrl;
+                return background != string.Empty ? background : "http://www.tdfast.com/wallpapers_res1/431_9923_2.jpg";
+            }
+            
             //get { return "http://www.tdfast.com/wallpapers_res1/439_10672_1.jpg"; }
             //get { return "http://www.tdfast.com/wallpapers_res1/1_6474_2.jpg"; }
             //get { return "http://www.tdfast.com/wallpapers_res1/22244.jpg"; }
-            get { return "http://www.tdfast.com/wallpapers_res1/431_9923_2.jpg"; }
             //get { return "http://www.tdfast.com/wallpapers_res1/431_9908_6.jpg"; }
             //get { return "http://www.tdfast.com/wallpapers_res1/389_8814_2.jpg"; }
             //get { return "http://www.tdfast.com/wallpapers_res1/389_8751_3.jpg"; }
