@@ -12,14 +12,14 @@
                 <GradientStop Color="#FF626262" Offset="0.828"/>
             </LinearGradientBrush>
         </Border.Background>
-        <Border Grid.Row="0" BorderThickness="1" CornerRadius="5" Background="White" BorderBrush="Gray" >
+        <Border Grid.Row="0" BorderThickness="1" CornerRadius="5" Background="White" BorderBrush="Black" HorizontalAlignment="Left">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="40" />
+                    <RowDefinition Height="35" />
                 </Grid.RowDefinitions>
                 
-                <ListBox Grid.Row="0" ItemsSource="{Binding SearchResultCommands}" x:Name="searchResultListBox" Visibility="{Binding SearchResultVisibility}">
+                <ListBox Grid.Row="0" ItemsSource="{Binding SearchResultCommands}" x:Name="searchResultListBox" Visibility="{Binding SearchResultVisibility}" Width="300">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" Background="Transparent">
@@ -39,12 +39,12 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
 
-                <Grid Grid.Row="0" VerticalAlignment="Stretch" x:Name="topScoreStackPanel" HorizontalAlignment="Left" Background="Transparent" Visibility="{Binding TopScoreVisibility}">
+                <Grid Grid.Row="0" VerticalAlignment="Stretch" x:Name="topScoreStackPanel" HorizontalAlignment="Left" Background="Transparent" Visibility="{Binding TopScoreVisibility}" Width="200">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
-                            <RowDefinition Height="20" />
+                            <RowDefinition Height="18" />
                         </Grid.RowDefinitions>
-                        <ListBox Grid.Row="0" Background="Transparent" ItemsSource="{Binding TopScoreCommands}" x:Name="topScoreCommandListBox" Width="200">
+                        <ListBox Grid.Row="0" Background="Transparent" ItemsSource="{Binding TopScoreCommands}" x:Name="topScoreCommandListBox">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" Background="Transparent">
@@ -64,14 +64,12 @@
                             </ListBox.ItemTemplate>
                         </ListBox>
                         <HyperlinkButton Grid.Row="1" Content="all features" VerticalAlignment="Center" Click="HyperlinkButton_Click" />
-
                 </Grid>
 
-
-                <Grid Grid.Row="0" x:Name="allStackPanel"  HorizontalAlignment="Left" Background="Transparent" Visibility="{Binding AllVisibility}" >
+                <Grid Grid.Row="0" x:Name="allStackPanel"  HorizontalAlignment="Left" Background="Transparent" Visibility="{Binding AllVisibility}" Width="200">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
-                            <RowDefinition Height="20" />
+                            <RowDefinition Height="18" />
                         </Grid.RowDefinitions>
                         <ListBox Grid.Row="0" BorderThickness="0" Background="Transparent" ItemsSource="{Binding AllCommands}" x:Name="allListBox" Visibility="{Binding AllVisibility}">
                             <ListBox.ItemTemplate>
@@ -95,14 +93,11 @@
                         <HyperlinkButton Grid.Row="1" Content="back" VerticalAlignment="Center" Click="HyperlinkButton_Click_1" />
                     </Grid>
 
-
-                    <StackPanel Grid.Row="1" Orientation="Horizontal">
-                        <TextBox  Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=Explicit}" x:Name="searchTextBox" Width="200"  Height="22"/>
-                    </StackPanel>
+                <StackPanel Grid.Row="1" Background="Transparent" Orientation="Horizontal">
+                    <TextBox  Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=Explicit}" x:Name="searchTextBox" Width="200"  Height="22"/>
+                </StackPanel>
             </Grid>
 
         </Border>
-
-
     </Border>
 </controls:ChildWindow>
