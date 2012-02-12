@@ -13,7 +13,7 @@
     <RootNamespace>ShellLight.Web</RootNamespace>
     <AssemblyName>ShellLight.Web</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <SilverlightApplicationList>{2CE81500-AB78-49FB-B050-6EA76C56F60D}|..\ShellLight\ShellLight.csproj|ClientBin|False,{38A05BAF-D0B5-4FA4-8961-4DFF356340B8}|..\ShellLight.Framework\ShellLight.Framework.csproj|ClientBin|False,{7B90C057-6266-474E-B074-953D97725B1B}|..\ShellLight.Test\ShellLight.Test.csproj|ClientBin|False,{2D4AC67C-76B6-4A4B-9680-B806DB544CD2}|..\ShellLight.HowTo\ShellLight.HowTo.csproj|ClientBin|False,{38369E27-8E62-468C-A4C4-82D33BB91DF1}|..\Kanbana.Client\Kanbana.Client.csproj|ClientBin|False</SilverlightApplicationList>
+    <SilverlightApplicationList>{2CE81500-AB78-49FB-B050-6EA76C56F60D}|..\ShellLight\ShellLight.csproj|ClientBin|False,{2D4AC67C-76B6-4A4B-9680-B806DB544CD2}|..\ShellLight.HowTo\ShellLight.HowTo.csproj|ClientBin|False,{38A05BAF-D0B5-4FA4-8961-4DFF356340B8}|..\ShellLight.Framework\ShellLight.Framework.csproj|ClientBin|False</SilverlightApplicationList>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -51,10 +51,8 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ClientBin\Kanbana.Client.xap" />
     <Content Include="ClientBin\ShellLight.Framework.xap" />
     <Content Include="ClientBin\ShellLight.HowTo.xap" />
-    <Content Include="ClientBin\ShellLight.Test.xap" />
     <Content Include="ClientBin\ShellLight.xap" />
     <Content Include="Default.aspx" />
     <Content Include="Images\logo_16.png" />
@@ -71,6 +69,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
@@ -79,7 +78,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>49526</DevelopmentServerPort>
+          <DevelopmentServerPort>57961</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
