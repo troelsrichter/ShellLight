@@ -34,7 +34,9 @@ namespace ShellLight.Views
 
         void searchTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            var listbox = searchResultListBox.Visibility == Visibility.Visible ? searchResultListBox : topScoreListBox.Visibility == Visibility.Visible ? topScoreListBox : allListBox;
+            var datacontext = DataContext as SearchWindowViewModel;
+
+            var listbox = datacontext.SearchResultVisibility == Visibility.Visible ? searchResultListBox : datacontext.TopScoreVisibility == Visibility.Visible ? topScoreListBox : allListBox;
 
             if (listbox != null)
             {
