@@ -44,7 +44,7 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="18" />
                         </Grid.RowDefinitions>
-                        <ListBox Grid.Row="0" Background="Transparent" ItemsSource="{Binding TopScoreCommands}" x:Name="topScoreCommandListBox">
+                        <ListBox Grid.Row="0" Background="Transparent" ItemsSource="{Binding TopScoreCommands}" x:Name="topScoreListBox">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" Background="Transparent">
@@ -63,7 +63,7 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                        <HyperlinkButton Grid.Row="1" Content="all features" VerticalAlignment="Center" Click="HyperlinkButton_Click" />
+                        <HyperlinkButton Grid.Row="1" Content="all features" VerticalAlignment="Center" Click="AllFeaturesButton_Click" />
                 </Grid>
 
                 <Grid Grid.Row="0" x:Name="allStackPanel"  HorizontalAlignment="Left" Background="Transparent" Visibility="{Binding AllVisibility}" Width="200">
@@ -90,11 +90,11 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                        <HyperlinkButton Grid.Row="1" Content="back" VerticalAlignment="Center" Click="HyperlinkButton_Click_1" />
+                        <HyperlinkButton Grid.Row="1" Content="back" VerticalAlignment="Center" Click="BackButton_Click" />
                     </Grid>
 
                 <StackPanel Grid.Row="1" Background="Transparent" Orientation="Horizontal">
-                    <TextBox  Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=Explicit}" x:Name="searchTextBox" Width="200"  Height="22"/>
+                    <TextBox Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=Explicit}" x:Name="searchTextBox" Width="200"  Height="22" Margin="5,0,5,0"/>
                 </StackPanel>
             </Grid>
 

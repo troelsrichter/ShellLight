@@ -34,7 +34,7 @@ namespace ShellLight.Views
 
         void searchTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            var listbox = searchResultListBox.Visibility == Visibility.Visible ? searchResultListBox : topScoreCommandListBox;
+            var listbox = searchResultListBox.Visibility == Visibility.Visible ? searchResultListBox : topScoreListBox.Visibility == Visibility.Visible ? topScoreListBox : allListBox;
 
             if (listbox != null)
             {
@@ -146,7 +146,7 @@ namespace ShellLight.Views
             }
         }
 
-        private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
+        private void AllFeaturesButton_Click(object sender, RoutedEventArgs e)
         {
             var datacontext = DataContext as SearchWindowViewModel;
             datacontext.AllCommands = new ObservableCollection<UICommand>(launcherCommands);
@@ -154,7 +154,7 @@ namespace ShellLight.Views
             datacontext.Refresh();
         }
 
-        private void HyperlinkButton_Click_1(object sender, RoutedEventArgs e)
+        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             var datacontext = DataContext as SearchWindowViewModel;
             datacontext.Mode = LauncherMode.TopFeatures;
