@@ -63,7 +63,7 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                        <HyperlinkButton Grid.Row="1" Content="all features" VerticalAlignment="Center" Click="AllFeaturesButton_Click" />
+                        <HyperlinkButton Grid.Row="1" Content=">> all features" VerticalAlignment="Center" Click="AllFeaturesButton_Click" />
                 </Grid>
 
                 <Grid Grid.Row="0" x:Name="allStackPanel"  HorizontalAlignment="Left" Background="Transparent" Visibility="{Binding AllVisibility}" Width="200">
@@ -90,7 +90,7 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                        <HyperlinkButton Grid.Row="1" Content="back" VerticalAlignment="Center" Click="BackButton_Click" />
+                    <HyperlinkButton Grid.Row="1" Content="&#60;&#60; back" VerticalAlignment="Center" Click="BackButton_Click" />
                     </Grid>
 
                 <StackPanel Grid.Row="1" Background="Transparent" Orientation="Horizontal">
