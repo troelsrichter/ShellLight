@@ -154,6 +154,7 @@ namespace ShellLight.Views
             datacontext.AllCommands = new ObservableCollection<UICommand>(launcherCommands);
             datacontext.Mode = LauncherMode.AllFeatures;
             datacontext.Refresh();
+            searchTextBox.Focus();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -161,6 +162,7 @@ namespace ShellLight.Views
             var datacontext = DataContext as SearchWindowViewModel;
             datacontext.Mode = LauncherMode.TopFeatures;
             datacontext.Refresh();
+            searchTextBox.Focus();
         }
     }
 }
