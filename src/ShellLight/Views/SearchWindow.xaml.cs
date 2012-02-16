@@ -104,8 +104,11 @@ namespace ShellLight.Views
         {
             var datacontext = new SearchWindowViewModel();
 
-            var top3Commands = CommandFinder.CreateTop3Commands(commands);
-            foreach (var command in top3Commands)
+            datacontext.AllCommands = new ObservableCollection<UICommand>(commands);
+            var topCommands = CommandFinder.CreateTop5Commands(commands);
+            datacontext.Mode = topCommands.Count > 0 ? LauncherMode.TopFeatures : LauncherMode.AllFeatures;
+
+            foreach (var command in topCommands)
             {
                 var executionContext = new UICommandContext() { Events = events, RegiseredCommands = new List<UICommand>(registeredCommands) };
                 command.Context = executionContext;
@@ -151,9 +154,7 @@ namespace ShellLight.Views
         private void AllFeaturesButton_Click(object sender, RoutedEventArgs e)
         {
             var datacontext = DataContext as SearchWindowViewModel;
-            datacontext.AllCommands = new ObservableCollection<UICommand>(launcherCommands);
             datacontext.Mode = LauncherMode.AllFeatures;
-            datacontext.Refresh();
             searchTextBox.Focus();
         }
 
@@ -161,7 +162,6 @@ namespace ShellLight.Views
         {
             var datacontext = DataContext as SearchWindowViewModel;
             datacontext.Mode = LauncherMode.TopFeatures;
-            datacontext.Refresh();
             searchTextBox.Focus();
         }
     }

@@ -1,5 +1,5 @@
+using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Windows;
 using ShellLight.Contract;
 
@@ -14,6 +14,8 @@ namespace ShellLight.ViewModels
 
     public class SearchWindowViewModel: ViewModelBase
     {
+        private LauncherMode lastMode;
+
         public SearchWindowViewModel()
         {
             topScoreCommands = new ObservableCollection<UICommand>();
@@ -61,8 +63,18 @@ namespace ShellLight.ViewModels
         {
             get { return searchText; }
             set { 
-                SetValue(ref searchText, value, "SearchText"); 
-                Refresh();
+                SetValue(ref searchText, value, "SearchText");
+                if (mode != LauncherMode.Search)
+                {
+                    lastMode = mode;
+                }
+                if (!string.IsNullOrEmpty(searchText))
+                {
+                    Mode = LauncherMode.Search;
+                } else
+                {
+                    Mode = lastMode;
+                }
             }
         }
 
@@ -71,16 +83,41 @@ namespace ShellLight.ViewModels
             OnPropertyChanged("SearchText", "TopScoreVisibility", "SearchResultVisibility", "AllVisibility");
         }
 
+        private string title;
         public string Title
         {
-            get { return Config.ApplicationName + " Launcher"; }
+            get { return title ; }
+            set { SetValue(ref title, value, "Title"); }
         }
 
         private LauncherMode mode = LauncherMode.TopFeatures;
         public LauncherMode Mode
         {
             get { return mode; }
-            set { SetValue(ref mode, value, "Mode"); }
+            set
+            {
+                SetValue(ref mode, value, "Mode");
+                OnLauncherModeChanged();
+            }
+        }
+
+        private void OnLauncherModeChanged()
+        {
+            switch (Mode)
+            {
+                case LauncherMode.AllFeatures:
+                    Title = Config.ApplicationName + ": All features";
+                    break;
+                case LauncherMode.TopFeatures:
+                    Title = Config.ApplicationName + ": Top 5 features";
+                    break;
+                case LauncherMode.Search:
+                    Title = Config.ApplicationName + ": Search results";
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            Refresh();
         }
 
     }
