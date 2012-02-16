@@ -19,7 +19,7 @@
                     <RowDefinition Height="35" />
                 </Grid.RowDefinitions>
 
-                <ListBox Grid.Row="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderThickness="0" ItemsSource="{Binding SearchResultCommands}" x:Name="searchResultListBox" Visibility="{Binding SearchResultVisibility}" Width="300">
+                <ListBox Grid.Row="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderThickness="0" Background="Transparent" ItemsSource="{Binding SearchResultCommands}" x:Name="searchResultListBox" Visibility="{Binding SearchResultVisibility}" Width="300">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" Background="Transparent">
