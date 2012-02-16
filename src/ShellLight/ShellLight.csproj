@@ -108,8 +108,8 @@
       <DependentUpon>ModalWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\SearchWindow.xaml.cs">
-      <DependentUpon>SearchWindow.xaml</DependentUpon>
+    <Compile Include="Views\LauncherWindow.xaml.cs">
+      <DependentUpon>LauncherWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TrayWindow.xaml.cs">
       <DependentUpon>TrayWindow.xaml</DependentUpon>
@@ -130,8 +130,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\SearchWindow.xaml">
+    <Page Include="Views\LauncherWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\TrayWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -11,7 +11,7 @@ using ShellLight.ViewModels;
 
 namespace ShellLight.Views
 {
-    public partial class SearchWindow : ChildWindow
+    public partial class LauncherWindow : ChildWindow
     {
         public event EventHandler<UICommandEventArgs> CommandPinnedToTaskbar;
         private readonly ObservableCollection<UICommand> launcherCommands;
@@ -19,7 +19,7 @@ namespace ShellLight.Views
 
         private readonly IEventAggregator events;
 
-        public SearchWindow()
+        public LauncherWindow()
         {
             InitializeComponent();
             this.searchTextBox.KeyDown += searchTextBox_KeyDown;
@@ -91,7 +91,7 @@ namespace ShellLight.Views
             }
         }
 
-        public SearchWindow(ObservableCollection<UICommand> commands, IEventAggregator events)
+        public LauncherWindow(ObservableCollection<UICommand> commands, IEventAggregator events)
             : this()
         {
             this.registeredCommands = commands;

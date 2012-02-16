@@ -22,7 +22,7 @@ namespace ShellLight
         public ObservableCollection<UICommand> RegisteredCommands { get; set; }
 
         private IEventAggregator events;
-        private SearchWindow searchWindow;
+        private LauncherWindow launcherWindow;
         private List<Uri> packagesToDownload;
         int numberOfRetriesWhenPackageDownloadFails = Config.NumberOfRetriesWhenPackageDownloadFails;
         private AggregateCatalog mainCatalog;
@@ -197,9 +197,9 @@ namespace ShellLight
 
         void command_BeforeShow(object sender, EventArgs e)
         {
-            if (searchWindow != null)
+            if (launcherWindow != null)
             {
-                searchWindow.Close();
+                launcherWindow.Close();
             }
         }
 
@@ -280,15 +280,15 @@ namespace ShellLight
 
         private void OpenSearchWindow()
         {
-            searchWindow = new SearchWindow(RegisteredCommands, events);
-            searchWindow.VerticalAlignment = VerticalAlignment.Bottom;
-            searchWindow.HorizontalAlignment = HorizontalAlignment.Left;
-            searchWindow.Show();
-            searchWindow.Closed += modalWindow_Closed;
-            searchWindow.CommandPinnedToTaskbar += searchWindow_CommandPinnedToTaskbar;
+            launcherWindow = new LauncherWindow(RegisteredCommands, events);
+            launcherWindow.VerticalAlignment = VerticalAlignment.Bottom;
+            launcherWindow.HorizontalAlignment = HorizontalAlignment.Left;
+            launcherWindow.Show();
+            launcherWindow.Closed += modalWindow_Closed;
+            launcherWindow.CommandPinnedToTaskbar += LauncherWindowCommandPinnedToTaskbar;
         }
 
-        void searchWindow_CommandPinnedToTaskbar(object sender, UICommandEventArgs e)
+        void LauncherWindowCommandPinnedToTaskbar(object sender, UICommandEventArgs e)
         {
             var datacontext = DataContext as MainPageViewModel;
             Config.IsolatedStorage.PinnedCommands[e.Command.Id] = true;
