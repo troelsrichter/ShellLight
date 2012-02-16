@@ -93,7 +93,13 @@
                     <HyperlinkButton Grid.Row="1" Content="&#60;&#60; back" VerticalAlignment="Center" Click="BackButton_Click" />
                 </Grid>
 
-                <Border CornerRadius="0,0,4,4" Grid.Row="1" Background="AliceBlue">
+                <Border CornerRadius="0,0,4,4" Grid.Row="1" >
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#a8ccea" Offset="0"/>
+                            <GradientStop Color="#f0f7f9" Offset="0.12"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
                     <TextBox Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=Explicit}" x:Name="searchTextBox" Height="22" Margin="5,0,5,0"/>
                 </Border>
             </Grid>
