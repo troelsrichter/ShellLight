@@ -1,13 +1,20 @@
+using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Windows;
 using ShellLight.Contract;
 
 namespace ShellLight.ViewModels
 {
-    public class SearchWindowViewModel: INotifyPropertyChanged
+    public enum LauncherMode
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        AllFeatures,
+        TopFeatures,
+        Search
+    } ;
+
+    public class SearchWindowViewModel: ViewModelBase
+    {
+        private LauncherMode lastMode;
 
         public SearchWindowViewModel()
         {
@@ -19,33 +26,26 @@ namespace ShellLight.ViewModels
         public ObservableCollection<UICommand> TopScoreCommands
         {
             get { return topScoreCommands; }
-            set
-            {
-                if (topScoreCommands != value)
-                {
-                    topScoreCommands = value;
-                    PropertyChanged(this, new PropertyChangedEventArgs("TopScoreCommands"));
-                }
-            }
+            set { SetValue(ref topScoreCommands, value, "TopScoreCommands"); }
+        }
+
+        private ObservableCollection<UICommand> allCommands;
+        public ObservableCollection<UICommand> AllCommands
+        {
+            get { return allCommands; }
+            set { SetValue(ref allCommands, value, "AllCommands"); }
         }
 
         private ObservableCollection<UICommand> searchResultCommands;
         public ObservableCollection<UICommand> SearchResultCommands
         {
             get { return searchResultCommands; }
-            set
-            {
-                if (searchResultCommands != value)
-                {
-                    searchResultCommands = value;
-                    PropertyChanged(this, new PropertyChangedEventArgs("SearchResultCommands"));
-                }
-            }
+            set { SetValue(ref searchResultCommands, value, "SearchResultCommands"); }
         }
 
         public Visibility TopScoreVisibility
         {
-            get { return string.IsNullOrEmpty(searchText) ? Visibility.Visible : Visibility.Collapsed; }
+            get { return mode == LauncherMode.TopFeatures && string.IsNullOrEmpty(searchText) ? Visibility.Visible : Visibility.Collapsed; }
         }
 
         public Visibility SearchResultVisibility
@@ -53,25 +53,72 @@ namespace ShellLight.ViewModels
             get { return !string.IsNullOrEmpty(searchText) ? Visibility.Visible : Visibility.Collapsed; }
         }
 
+        public Visibility AllVisibility
+        {
+            get { return mode == LauncherMode.AllFeatures && string.IsNullOrEmpty(searchText) ? Visibility.Visible : Visibility.Collapsed; }
+        }
+
         private string searchText = string.Empty;
         public string SearchText
         {
             get { return searchText; }
-            set
-            {
-                if (value != searchText)
+            set { 
+                SetValue(ref searchText, value, "SearchText");
+                if (mode != LauncherMode.Search)
                 {
-                    searchText = value;
-                    PropertyChanged(this, new PropertyChangedEventArgs("SearchText"));
-                    PropertyChanged(this, new PropertyChangedEventArgs("TopScoreVisibility"));
-                    PropertyChanged(this, new PropertyChangedEventArgs("SearchResultVisibility"));
+                    lastMode = mode;
+                }
+                if (!string.IsNullOrEmpty(searchText))
+                {
+                    Mode = LauncherMode.Search;
+                } else
+                {
+                    Mode = lastMode;
                 }
             }
         }
 
+        public void Refresh()
+        {
+            OnPropertyChanged("SearchText", "TopScoreVisibility", "SearchResultVisibility", "AllVisibility");
+        }
+
+        private string title;
         public string Title
         {
-            get { return Config.ApplicationName + " Launcher"; }
+            get { return title ; }
+            set { SetValue(ref title, value, "Title"); }
         }
+
+        private LauncherMode mode = LauncherMode.TopFeatures;
+        public LauncherMode Mode
+        {
+            get { return mode; }
+            set
+            {
+                SetValue(ref mode, value, "Mode");
+                OnLauncherModeChanged();
+            }
+        }
+
+        private void OnLauncherModeChanged()
+        {
+            switch (Mode)
+            {
+                case LauncherMode.AllFeatures:
+                    Title = Config.ApplicationName + ": All features";
+                    break;
+                case LauncherMode.TopFeatures:
+                    Title = Config.ApplicationName + ": Top 5 features";
+                    break;
+                case LauncherMode.Search:
+                    Title = Config.ApplicationName + ": Search results";
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            Refresh();
+        }
+
     }
 }

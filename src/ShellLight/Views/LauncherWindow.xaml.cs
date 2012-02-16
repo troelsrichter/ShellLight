@@ -11,7 +11,7 @@ using ShellLight.ViewModels;
 
 namespace ShellLight.Views
 {
-    public partial class SearchWindow : ChildWindow
+    public partial class LauncherWindow : ChildWindow
     {
         public event EventHandler<UICommandEventArgs> CommandPinnedToTaskbar;
         private readonly ObservableCollection<UICommand> launcherCommands;
@@ -19,7 +19,7 @@ namespace ShellLight.Views
 
         private readonly IEventAggregator events;
 
-        public SearchWindow()
+        public LauncherWindow()
         {
             InitializeComponent();
             this.searchTextBox.KeyDown += searchTextBox_KeyDown;
@@ -34,7 +34,9 @@ namespace ShellLight.Views
 
         void searchTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            var listbox = searchResultListBox.Visibility == Visibility.Visible ? searchResultListBox : topScoreCommandListBox;
+            var datacontext = DataContext as SearchWindowViewModel;
+
+            var listbox = datacontext.SearchResultVisibility == Visibility.Visible ? searchResultListBox : datacontext.TopScoreVisibility == Visibility.Visible ? topScoreListBox : allListBox;
 
             if (listbox != null)
             {
@@ -89,11 +91,11 @@ namespace ShellLight.Views
             }
         }
 
-        public SearchWindow(ObservableCollection<UICommand> commands, IEventAggregator events)
+        public LauncherWindow(ObservableCollection<UICommand> commands, IEventAggregator events)
             : this()
         {
             this.registeredCommands = commands;
-            this.launcherCommands = CommandFinder.FilterCommands(commands);
+            this.launcherCommands = CommandFinder.FilterCommands(commands.OrderBy(c => c.Name));
             this.events = events;
             InitializeDataContext(launcherCommands, events);
         }
@@ -102,8 +104,11 @@ namespace ShellLight.Views
         {
             var datacontext = new SearchWindowViewModel();
 
-            var top3Commands = CommandFinder.CreateTop3Commands(commands);
-            foreach (var command in top3Commands)
+            datacontext.AllCommands = new ObservableCollection<UICommand>(commands);
+            var topCommands = CommandFinder.CreateTop5Commands(commands);
+            datacontext.Mode = topCommands.Count > 0 ? LauncherMode.TopFeatures : LauncherMode.AllFeatures;
+
+            foreach (var command in topCommands)
             {
                 var executionContext = new UICommandContext() { Events = events, RegiseredCommands = new List<UICommand>(registeredCommands) };
                 command.Context = executionContext;
@@ -144,6 +149,20 @@ namespace ShellLight.Views
                     CommandPinnedToTaskbar(this, new UICommandEventArgs(commandToBePinnned));
                 }
             }
+        }
+
+        private void AllFeaturesButton_Click(object sender, RoutedEventArgs e)
+        {
+            var datacontext = DataContext as SearchWindowViewModel;
+            datacontext.Mode = LauncherMode.AllFeatures;
+            searchTextBox.Focus();
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            var datacontext = DataContext as SearchWindowViewModel;
+            datacontext.Mode = LauncherMode.TopFeatures;
+            searchTextBox.Focus();
         }
     }
 }

@@ -48,13 +48,13 @@ namespace ShellLight
       return foundCommands;
     }
 
-    public static List<UICommand> CreateTop3Commands(IEnumerable<UICommand> commands)
+    public static List<UICommand> CreateTop5Commands(IEnumerable<UICommand> commands)
     {
       var topScoreCommands = new List<UICommand>();
       var result = from c in commands where c.Score > 0 orderby c.Score descending select c;
       if (result.Count() > 0)
       {
-        topScoreCommands = result.Take(3).ToList();
+        topScoreCommands = result.Take(5).ToList();
       }
       return topScoreCommands;
     }
