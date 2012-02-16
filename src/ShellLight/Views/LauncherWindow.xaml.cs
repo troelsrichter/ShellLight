@@ -95,7 +95,7 @@ namespace ShellLight.Views
             : this()
         {
             this.registeredCommands = commands;
-            this.launcherCommands = CommandFinder.FilterCommands(commands);
+            this.launcherCommands = CommandFinder.FilterCommands(commands.OrderBy(c => c.Name));
             this.events = events;
             InitializeDataContext(launcherCommands, events);
         }
