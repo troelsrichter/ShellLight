@@ -23,7 +23,15 @@
             <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" Foreground="White" Text="{Binding CommandInFocus.Name}" />
         </StackPanel>
         <StackPanel Grid.Row="0" Grid.Column="1" Background="Black" Orientation="Horizontal" Opacity="0.8">
-            <Button Click="CloseCommandButton_Click" Visibility="{Binding CommandInFocusVisibility}" FontSize="8" Margin="130,0,0,0" Padding="0" Width="16" Height="16" Content="x" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right"></Button>
+            <Button Click="CloseCommandButton_Click" Visibility="{Binding CommandInFocusVisibility}" FontSize="11" Foreground="White" Margin="130,0,0,0" Padding="0" Width="16" Height="16" Content="x" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" Cursor="Hand">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Border" Background="Transparent">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
         </StackPanel>
 
         <Border Background="White" Opacity="0.95" Visibility="{Binding CommandInFocusVisibility}" Grid.ColumnSpan="2" Grid.Row="1" BorderThickness="2" BorderBrush="Black" CornerRadius="15" Margin="25" Padding="10">
