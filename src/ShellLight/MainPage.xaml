@@ -23,7 +23,15 @@
             <TextBlock Margin="5,0,0,0" VerticalAlignment="Center" Foreground="White" Text="{Binding CommandInFocus.Name}" />
         </StackPanel>
         <StackPanel Grid.Row="0" Grid.Column="1" Background="Black" Orientation="Horizontal" Opacity="0.8">
-            <Button Click="CloseCommandButton_Click" Visibility="{Binding CommandInFocusVisibility}" FontSize="8" Margin="130,0,0,0" Padding="0" Width="16" Height="16" Content="x" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right"></Button>
+            <Button Click="CloseCommandButton_Click" Visibility="{Binding CommandInFocusVisibility}" FontSize="11" Foreground="White" Margin="130,0,0,0" Padding="0" Width="16" Height="16" Content="x" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" Cursor="Hand">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Border" Background="Transparent">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
         </StackPanel>
 
         <Border Background="Transparent" Opacity="0.95" Visibility="{Binding CommandInFocusVisibility}" Grid.ColumnSpan="2" Grid.Row="1" BorderThickness="0">
@@ -39,7 +47,7 @@
                     <ToolTip  Content="Start launcher and search for any feature (Ctrl+F)"></ToolTip>
                 </ToolTipService.ToolTip>
             </Button>
-            <ItemsControl ItemsSource="{Binding TaskbarCommands}">
+            <ItemsControl ItemsSource="{Binding TaskbarCommands}" Margin="5,0,0,0">
                 <ItemsControl.Resources>
                     <Converters:UICommandStateToBoolConverter x:Key="UICommandStateToBoolConverter" />
                 </ItemsControl.Resources>
@@ -50,7 +58,14 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Margin="2" Command="{Binding}" CommandParameter="{Binding Context}">
+                        <Button Margin="2" Command="{Binding}" CommandParameter="{Binding Context}" Cursor="Hand">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border x:Name="Border" Background="Transparent">
+                                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
                             <Button.Content>
                                 <Image Source="{Binding IconSource}" Width="30" Height="30" />
                             </Button.Content>
@@ -81,7 +96,14 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Command="{Binding}" CommandParameter="{Binding Context}" BorderThickness="0" Margin="1" Background="Transparent">
+                        <Button Command="{Binding}" CommandParameter="{Binding Context}" BorderThickness="0" Margin="1" Background="Transparent" Cursor="Hand">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border x:Name="Border" Background="Transparent">
+                                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
                             <Button.Content>
                                 <Image Source="{Binding IconSource}" Width="16" Height="16" />
                             </Button.Content>
