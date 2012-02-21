@@ -73,9 +73,10 @@ namespace ShellLight
             get
             {
                 var background = IsolatedStorage.BackgroundImageUrl;
-                return background != string.Empty ? background : "http://www.tdfast.com/wallpapers_res1/431_9923_2.jpg";
+                return background != string.Empty ? background : "http://www.tdfast.com/wallpapers_res1/431_9908_6.jpg";
             }
-            
+
+            //"http://www.tdfast.com/wallpapers_res1/431_9923_2.jpg";
             //get { return "http://www.tdfast.com/wallpapers_res1/439_10672_1.jpg"; }
             //get { return "http://www.tdfast.com/wallpapers_res1/1_6474_2.jpg"; }
             //get { return "http://www.tdfast.com/wallpapers_res1/22244.jpg"; }
