@@ -39,7 +39,7 @@
         </Border>
 
         <StackPanel Grid.Row="2" Grid.Column="0" x:Name="taskStackPanel"  Orientation="Horizontal" Background="Black" Opacity="0.8">
-            <Button Margin="5,0,0,0" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"  Click="SearchButton_Click" Style="{StaticResource GlassButtonStyle}"  Background="#FFABE3FF" BorderBrush="#FF00AAFF" Height="34" Width="34">
+            <Button Margin="5,0,0,0" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"  Click="SearchButton_Click" Style="{StaticResource GlassButtonStyle}"  Background="#FFABE3FF" BorderBrush="#FF00AAFF" Height="33" Width="33">
                 <Button.Content>
                     <Image VerticalAlignment="Center" HorizontalAlignment="Center" Source="Images/logo_button.png" Width="28" Height="28"></Image>
                 </Button.Content>
