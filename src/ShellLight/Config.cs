@@ -73,7 +73,7 @@ namespace ShellLight
             get
             {
                 var background = IsolatedStorage.BackgroundImageUrl;
-                return background != string.Empty ? background : "http://www.tdfast.com/wallpapers_res1/431_9908_6.jpg";
+                return background != string.Empty ? background : "http://resources.kanbana.com/wallpapers/kanbana_wallpaper_1.jpg";
             }
 
             //"http://www.tdfast.com/wallpapers_res1/431_9923_2.jpg";
