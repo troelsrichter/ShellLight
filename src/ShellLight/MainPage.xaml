@@ -7,7 +7,7 @@
 
     <Grid x:Name="LayoutRoot" DataContext="{Binding}">
         <Grid.Background>
-            <ImageBrush ImageSource="{Binding BackgroundImageSource}" />
+            <ImageBrush ImageSource="{Binding BackgroundImageSource}" Stretch="None" />
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="20" />
