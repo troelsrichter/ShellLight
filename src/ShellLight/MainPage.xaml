@@ -34,7 +34,7 @@
             </Button>
         </StackPanel>
 
-        <Border Background="Transparent" Opacity="0.95" Visibility="{Binding CommandInFocusVisibility}" Grid.ColumnSpan="2" Grid.Row="1" BorderThickness="0">
+        <Border Background="Transparent" Visibility="{Binding CommandInFocusVisibility}" Grid.ColumnSpan="2" Grid.Row="1" BorderThickness="0">
             <ContentControl Content="{Binding CommandInFocus.View}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Background="Transparent" />
         </Border>
 
