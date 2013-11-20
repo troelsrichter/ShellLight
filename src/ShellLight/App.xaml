@@ -334,5 +334,14 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="ControlBorder" TargetType="Border">
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="BorderBrush" Value="#F3cccccc" />
+            <Setter Property="Background" Value="#F3eeeeee"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="Padding" Value="10,10,10,10" />
+            <Setter Property="Margin" Value="3" />
+        </Style>
     </Application.Resources>
 </Application>
